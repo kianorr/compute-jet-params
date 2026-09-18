@@ -184,6 +184,33 @@ def B_min_flow(data):
 
 
 @register_compute_func(
+    name="J_r",
+    label="$J_r$",
+    units="A/m$^2$",
+    data_deps=["nele", "v_flow"],
+    description="Radial current density at collision site.",
+)
+def J_r(data):
+    jr = - constants.elementary_charge * data["n_e"] * data["v_flow"]
+    data["J_r"] = jr
+    return data
+
+
+@register_compute_func(
+    name="dB_biermann",
+    label="$\\Delta B_{\\text{Biermann}}$",
+    units="T",
+    data_deps=["dne_biermann", "dT_e_biermann", "dL_ne_biermann", "dL_Te_biermann", "n_e", "dt_biermann"],
+    description="Biermann generation from given gradients.",
+)
+def dB_biermann(data):
+    ne_grad = (data["dne_biermann"] * 1e-6) / (data["dL_ne_biermann"] * 1e-2)
+    te_grad = data["dT_e_biermann"] * constants.electron_volt / (data["dL_Te_biermann"] * 1e-2)
+    data["dB_biermann"] = te_grad * ne_grad / (data["n_e"] * 1e-6 * constants.elementary_charge) * data["dt_biermann"]
+    return data
+
+
+@register_compute_func(
     name="gamma_W",
     label="$\\gamma_{\\text{W}}$",
     units="ns$^{-1}$",

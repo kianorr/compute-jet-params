@@ -122,6 +122,61 @@ def B(data):
 
 
 @register_compute_func(
+    name="dT_e_biermann",
+    label="$\\Delta T_e$",
+    units="eV",
+    data_deps=[],
+    description="Change in electron temperature.",
+)
+def dT_e_biermann(data):
+    return data
+
+
+@register_compute_func(
+    name="dne_biermann",
+    label="$\\Delta n_e$",
+    units="cm$^{-3}$",
+    data_deps=[],
+    description="Change in electron number density.",
+)
+def dne_biermann(data):
+    return data
+
+
+@register_compute_func(
+    name="dL_ne_biermann",
+    label="$\\Delta L_{\\text{ne, Bier}}$",
+    units="cm",
+    data_deps=[],
+    description="Length scale for the Biermann battery effect.",
+)
+def dL_ne_biermann(data):
+    return data
+
+
+@register_compute_func(
+    name="dL_Te_biermann",
+    label="$\\Delta L_{\\text{Te, Bier}}$",
+    units="cm",
+    data_deps=[],
+    description="Length scale for the Biermann battery effect.",
+)
+def dL_Te_biermann(data):
+    return data
+
+
+@register_compute_func(
+    name="dt_biermann",
+    label="$\\Delta t_{\\text{Biermann}}$",
+    units="s",
+    data_deps=[],
+    description="Time scale for the Biermann battery effect.",
+)
+def dt_biermann(data):
+    return data
+
+
+@register_compute_func(
     name="R_length",
     label="$l_{Re}$",
     units="cm",

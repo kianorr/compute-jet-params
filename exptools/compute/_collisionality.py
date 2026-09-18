@@ -47,6 +47,19 @@ def ion_ele_thermal_velocity(data):
 
 
 @register_compute_func(
+    name="T_i_flow",
+    label="$T_{i, \\text{thermalized}}$",
+    units="keV",
+    data_deps=["v_flow", "m_i"],
+    description="T_i corresponding to flow -> thermalization"
+)
+def T_i_flow(data):
+    T_i = (data["v_flow"] * 1e-2) ** 2 * data["m_i"] / (2 * constants.electron_volt)
+    data["T_i_flow"] = T_i * 1e-3
+    return data
+
+
+@register_compute_func(
     name="ion_collision_freq",
     label="$\\nu_i$",
     units="1/s",
